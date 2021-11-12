@@ -74,4 +74,51 @@ add primary key (course_id);
 alter table teachers 
 add foreign key (course_id) references course(course_id);
 
+--joining
+select * from teachers t, students s, course c
+where t.teacher_id = s.student_id and 
+c.course_id = t.course_id 
+
+--it will show you teacher_name from teachers table, course_rating from course table and all data columns from students table where teacher_id and stu
+
+select t.teacher_name ,c.* from teachers t, course c
+where c.course_id = t.course_id; 
+
+insert into public.course (course_name,course_rating,course_id) values('IOT',5,3);
+
+--INNER JOIN
+
+SELECT c.*, t.* 
+FROM course c 
+INNER JOIN teachers t ON c.course_id =t.course_id ;
+
+
+-- inner join --match the condition that we define after the ON show the data of both table where teacher_id is same
+-- it resultaint is student_id , student_name  form s table and all the columns from teachers table
+
+select s.student_name, s.student_id ,t.*  from students s inner join teachers t on t.teacher_id = s.teacher_id ;
+
+--LEFT INNER JOIN 
+-- here we will see that all columns of students (left)table and
+-- those columns of teachers(right) table where teacher_id is similar to teacher_id of student table
+
+select s.* from students s left join teachers t on t.teacher_id = s.teacher_id ;
+
+-- RIGHT INNER JOIN
+-- here we will see that all columns of teachers (right) table and
+-- those columns of student (left) table where teacher_id is similar to teacher_id of teachers table
+select t.*,s.* from students s right join teachers t on t.teacher_id = s.teacher_id ;
+
+
+-- GROUP BY 
+-- here we find that how mnay teachers teaching one course or any course order by teacher
+select count(t.teacher_name) as teacher, t.course  from teachers t
+group by course
+order by teacher;
+
+
+
+
+
+
 
